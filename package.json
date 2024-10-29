@@ -1,0 +1,18 @@
+{
+  "name": "pr_review_module",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "main": "./src/send_to_llm.js",
+  "bin": {
+    "pr_review": "./bin/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "openai": "^4.67.3"
+  }
+}
