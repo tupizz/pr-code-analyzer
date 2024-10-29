@@ -4,7 +4,30 @@ This tool allows users to generate structured changes from Git diffs and send th
 
 ## Prerequisites
 
-Ensure that Node.js and npm are installed on your system.
+1. Ensure that Node.js and npm are installed on your system.
+2. You must have an environment variable `OPEN_API_KEY` set to your OpenAI API key. The tool relies on this key to send the structured diff to the language model for review.
+
+### Setting the OpenAI API Key:
+
+Before running the tool, set the `OPEN_API_KEY` environment variable in your terminal. Use the following command depending on your operating system:
+
+- For **Linux/macOS**:
+
+  ```bash
+  export OPEN_API_KEY=your_openai_api_key
+  ```
+
+- For **Windows** (Command Prompt):
+
+  ```cmd
+  set OPEN_API_KEY=your_openai_api_key
+  ```
+
+- For **Windows** (Powershell):
+
+  ```powershell
+  $env:OPEN_API_KEY="your_openai_api_key"
+  ```
 
 ## Installation
 
@@ -31,6 +54,7 @@ pr_review <branch_name> <mode> <target_branch>
 2. **mode**: Specifies the operation mode. It can be either:
    - `brief`: Send changes to the LLM for a brief description.
    - `review`: Send changes to the LLM for a full review.
+   - `description`: Send changes to the LLM for a more robust description, with diagrams and topics, nice to be used in PR Description.
    
 3. **target_branch**: (Optional) The branch to compare against. Default is `development`.
 
@@ -39,12 +63,12 @@ pr_review <branch_name> <mode> <target_branch>
 To run the tool for a feature branch and generate a brief description of changes compared to the `development` branch:
 
 ```bash
-pr_review feature/PB-29024-transcript-v2 brief dev
+pr_review feature/example-branch brief dev
 ```
 
 This command will:
 1. Fetch the latest changes from the remote repository.
-2. Check out the specified branch (`feature/PB-29024-transcript-v2`).
+2. Check out the specified branch (`feature/example-branch`).
 3. Generate a diff between the specified branch and the target branch (`dev`).
 4. Parse the diff to identify added or removed lines.
 5. Save the structured diff in a temporary file.
