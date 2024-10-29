@@ -6,7 +6,6 @@ const OpenAI = require("openai");
 const logger = require("./logger");
 const { PROMPTS } = require("../MODE_FOR_PROMPT");
 
-
 /**
  * LLMService class for interacting with OpenAI's GPT-4o-mini model
  */
@@ -56,7 +55,7 @@ module.exports = class LLMService {
       // Save and return results
       const outputPath = path.join(
         fsSync.mkdtempSync(path.join(os.tmpdir(), "llm-")),
-        `output_${mode}.txt`
+        `output_${mode}.txt`,
       );
 
       const result = response.choices[0].message.content;
