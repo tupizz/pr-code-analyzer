@@ -1,97 +1,213 @@
 # PR Review Tool
 
-This tool allows users to generate structured changes from Git diffs and send them to a language model (LLM) for review or description. It parses changes in a specific Git branch, structures the added and removed lines, and then sends them to an external service for further processing.
+An advanced CLI tool for automated code review and PR description generation using LLM (Language Learning Model). This tool analyzes Git diffs, structures the changes, and leverages AI to provide insightful code reviews and PR descriptions.
+
+## Features
+
+- 🔍 Automated code review generation
+- 📝 PR description generation with diagrams and topics
+- 🎯 Multiple review modes (brief, detailed, description)
+- 📊 Structured diff analysis
+- 🚀 Command-line interface with rich options
+- 📋 Comprehensive logging system
+- 🛡️ Robust error handling
 
 ## Prerequisites
 
-1. Ensure that Node.js and npm are installed on your system.
-2. You must have an environment variable `OPEN_API_KEY` set to your OpenAI API key. The tool relies on this key to send the structured diff to the language model for review.
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+- Git installed and configured
+- OpenAI API key
 
-### Setting the OpenAI API Key:
+### OpenAI API Key Configuration
 
-Before running the tool, set the `OPEN_API_KEY` environment variable in your terminal. Use the following command depending on your operating system:
+Set up your OpenAI API key as an environment variable:
 
-- For **Linux/macOS**:
+```bash
+# Linux/macOS
+export OPEN_API_KEY=your_openai_api_key
 
-  ```bash
-  export OPEN_API_KEY=your_openai_api_key
-  ```
+# Windows (Command Prompt)
+set OPEN_API_KEY=your_openai_api_key
 
-- For **Windows** (Command Prompt):
-
-  ```cmd
-  set OPEN_API_KEY=your_openai_api_key
-  ```
-
-- For **Windows** (Powershell):
-
-  ```powershell
-  $env:OPEN_API_KEY="your_openai_api_key"
-  ```
+# Windows (PowerShell)
+$env:OPEN_API_KEY="your_openai_api_key"
+```
 
 ## Installation
 
-To install the tool globally on your machine, navigate to the directory where the project is located and run the following command:
+1. Install the required dependencies:
+
+```bash
+npm install commander winston
+```
+
+2. Install the tool globally:
 
 ```bash
 npm install -g .
 ```
 
-This installs the tool globally, making it accessible from anywhere on your system.
-
 ## Usage
 
-Once installed, you can invoke the tool using the following command:
+### Basic Command Structure
 
 ```bash
-pr_review <branch_name> <mode> <target_branch>
+pr-reviewer [options]
 ```
 
-### Arguments:
+### Options
 
-1. **branch_name**: The name of the branch for which the diff should be generated. Example: `feature/PB-29024-transcript-v2`
-   
-2. **mode**: Specifies the operation mode. It can be either:
-   - `brief`: Send changes to the LLM for a brief description.
-   - `review`: Send changes to the LLM for a full review.
-   - `description`: Send changes to the LLM for a more robust description, with diagrams and topics, nice to be used in PR Description.
-   
-3. **target_branch**: (Optional) The branch to compare against. Default is `development`.
+```
+Options:
+  -V, --version                    output version number
+  -b, --branch <branch>           branch name to review (required)
+  -m, --mode <mode>               review mode (review/description) (default: "review")
+  -t, --target-branch <branch>    target branch to compare against (default: "development")
+  -v, --verbose                   enable verbose logging
+  -h, --help                      display help for command
+```
 
-### Example:
-
-To run the tool for a feature branch and generate a brief description of changes compared to the `development` branch:
+### Examples
 
 ```bash
-pr_review feature/example-branch brief dev
+# Basic review of a feature branch
+pr-reviewer -b feature/new-feature
+
+# Generate detailed description comparing against main branch
+pr-reviewer -b feature/new-feature -m description -t main
+
+# Review with verbose logging
+pr-reviewer -b feature/new-feature -v
+
+# Show help
+pr-reviewer --help
 ```
 
-This command will:
-1. Fetch the latest changes from the remote repository.
-2. Check out the specified branch (`feature/example-branch`).
-3. Generate a diff between the specified branch and the target branch (`dev`).
-4. Parse the diff to identify added or removed lines.
-5. Save the structured diff in a temporary file.
-6. Send the structured changes to the LLM for review or a description based on the mode.
-7. Save the LLM's response.
+## Review Modes
+
+1. **review** (default)
+   - Performs a detailed code review
+   - Identifies potential issues
+   - Suggests improvements
+   - Reviews code style and best practices
+
+2. **description**
+   - Generates comprehensive PR description
+   - Creates diagrams where applicable
+   - Lists key changes and impacts
+   - Provides technical context
+
+3. **brief**
+   - Quick summary of changes
+   - High-level impact analysis
+   - Key points for reviewers
+
+## Output
+
+The tool generates several output files:
+
+- `combined.log`: Complete execution log
+- `error.log`: Error-specific logging
+- Temporary diff files (automatically cleaned up)
+- LLM review output (saved to specified location)
 
 ## How It Works
 
-1. **Fetching and Diff Generation**: The tool fetches the latest changes from the remote repository and generates a diff between the specified branch and the target branch.
-2. **Parsing the Diff**: The diff is parsed, and the added/removed lines are structured by file.
-3. **Saving Changes**: The structured changes are saved to a temporary file.
-4. **Sending to LLM**: The tool sends the structured changes to the LLM for review or description, depending on the mode selected.
-5. **Output**: The tool will log where the final structured changes and LLM output are saved.
+1. **Initialization**
+   - Parses command-line arguments
+   - Validates input parameters
+   - Sets up logging system
+
+2. **Git Operations**
+   - Fetches latest changes
+   - Checks out specified branch
+   - Generates diff against target branch
+
+3. **Diff Processing**
+   - Parses Git diff output
+   - Structures changes by file
+   - Identifies additions and removals
+
+4. **LLM Integration**
+   - Sends structured changes to LLM
+   - Processes LLM response
+   - Generates formatted output
+
+5. **Cleanup**
+   - Removes temporary files
+   - Logs operation completion
+   - Handles any errors
 
 ## Error Handling
 
-If any errors occur during execution (e.g., network issues, Git problems), the tool will log the error and terminate the process.
+The tool includes comprehensive error handling for:
+- Git operation failures
+- File system issues
+- LLM communication problems
+- Invalid input parameters
 
-## Additional Notes
+Errors are:
+- Logged to error.log
+- Displayed in console with context
+- Handled gracefully with proper cleanup
 
-- Ensure you have the necessary permissions to fetch and checkout branches from the repository.
-- The LLM communication is handled by the `sendChangesToLLM` function located in `src/send_to_llm`.
+## Development
+
+### Project Structure
+
+```
+pr-reviewer/
+├── src/
+│   ├── GitOperations.js
+│   ├── DiffParser.js
+│   ├── PRReviewer.js
+│   └── send_to_llm.js
+├── logs/
+│   ├── combined.log
+│   └── error.log
+└── package.json
+```
+
+### Adding New Features
+
+1. Follow the existing class structure
+2. Implement error handling
+3. Add appropriate logging
+4. Update tests if applicable
+
+## Troubleshooting
+
+Common issues and solutions:
+
+1. **Git access errors**
+   - Ensure Git is properly configured
+   - Check repository permissions
+
+2. **API key issues**
+   - Verify OPEN_API_KEY is set
+   - Check key validity
+
+3. **Parsing errors**
+   - Ensure branch exists
+   - Check for valid diff output
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
 ## License
 
-This tool is licensed under the MIT License.
+MIT License - see LICENSE.md for details
+
+## Support
+
+For bugs and feature requests, please create an issue in the repository.
+
+---
+
+**Note**: This tool is in active development. Please report any issues or suggestions for improvement.

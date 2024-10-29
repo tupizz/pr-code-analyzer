@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+ 
 const fs = require('fs');
 const path = require('path');
 const OpenAI = require('openai');
@@ -75,18 +75,3 @@ module.exports = async function sendChangesToLLM(changesFilePath, mode = 'review
     return null;
   }
 };
-
-// // Get the structured changes file path from the command line arguments
-// const changesFilePath = process.argv[2];
-// if (!changesFilePath) {
-//   console.error('Usage: node send_to_llm.js <changes_file_path> <review_file_path> <mode>');
-//   process.exit(1);
-// }
-
-// let mode = process.argv[4]; // review or description
-// if (!mode) {
-//   mode = 'review';
-// }
-
-// // Call the function to send the changes to LLM
-// sendChangesToLLM(changesFilePath, mode);
