@@ -1,6 +1,6 @@
 # PR Review Tool
 
-An advanced CLI tool for automated code review and PR description generation using LLM (Language Learning Model). This tool analyzes Git diffs, structures the changes, and leverages AI to provide insightful code reviews and PR descriptions.
+A CLI tool for automated code review and PR description generation using LLM (Language Learning Model). This tool analyzes Git diffs, structures the changes, and leverages AI to provide insightful code reviews and PR descriptions.
 
 ## Features
 
