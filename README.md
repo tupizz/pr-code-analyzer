@@ -192,13 +192,95 @@ Common issues and solutions:
    - Ensure branch exists
    - Check for valid diff output
 
-## Contributing
+## Customizing Prompts
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+The tool uses customizable prompts for different review modes. These prompts can be modified by editing the `MODE_FOR_PROMPT.js` file in the project root.
+
+### Prompt Structure
+
+```js
+// prompts.js
+module.exports = {
+  PROMPTS: {
+    review: `[Your custom review prompt]`,
+    brief: `[Your custom brief prompt]`,
+    description: `[Your custom description prompt]`
+  }
+};
+```
+
+### Available Modes
+
+1. **review**: Used for detailed code reviews
+2. **brief**: Used for quick summaries
+3. **description**: Used for PR descriptions
+
+### Customizing Prompts
+
+To modify the prompts:
+
+1. Locate `MODE_FOR_PROMPT.js` in the project root
+2. Edit the desired prompt in the `PROMPTS` object
+3. Save the file - changes will take effect immediately
+
+### Example Customization
+
+```js
+// prompts.js
+module.exports = {
+  PROMPTS: {
+    review: `
+      As a senior developer, review this code focusing on:
+      - Performance implications
+      - Security concerns
+      - Best practices
+      - Potential edge cases
+      Please be constructive and specific.
+    `,
+    brief: `
+      Provide a 2-3 sentence summary of the changes.
+      Include:
+      - Main purpose 🎯
+      - Key technical changes 🔧
+      - Impact on users 👥
+    `,
+    description: `
+      Create a comprehensive PR description with:
+      1. Overview of changes
+      2. Technical implementation details
+      3. Testing considerations
+      4. Visual diagrams where applicable
+    `
+  }
+};
+```
+
+### Best Practices for Custom Prompts
+
+1. **Be Specific**: Clearly define what you want the LLM to focus on
+2. **Format Consistently**: Use clear formatting for better readability
+3. **Include Guidelines**: Add specific instructions for output format
+4. **Keep it Focused**: Each prompt should have a single clear purpose
+5. **Test Changes**: Verify new prompts generate desired outputs
+
+### Adding New Modes
+
+To add a new review mode:
+
+1. Add your new prompt to the `PROMPTS` object:
+   ```js
+   module.exports = {
+     PROMPTS: {
+       // Existing prompts...
+       newMode: `Your new prompt here`
+     }
+   };
+   ```
+
+2. Use the new mode:
+   ```bash
+   pr-reviewer -b feature/branch -m newMode
+   ```
 
 ## License
 

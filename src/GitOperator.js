@@ -1,4 +1,3 @@
-
 const { execSync } = require("child_process");
 const logger = require("./logger");
 
@@ -42,4 +41,4 @@ module.exports = class GitOperator {
     logger.info(`Generating diff against ${targetBranch}...`);
     return this.executeGitCommand(`git diff origin/${targetBranch}...HEAD`);
   }
-}
+};

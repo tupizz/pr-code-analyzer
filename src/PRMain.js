@@ -1,10 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
-const sendChangesToLLM = require("../src/send_to_llm");
+
 const GitOperator = require("./GitOperator");
-const logger = require("./logger");
 const DiffParser = require("./DiffParser");
+const LLMService = require("./LLMAdapter");
+const logger = require("./logger");
 
 module.exports = class PRReviewer {
   constructor(options) {
@@ -33,7 +34,10 @@ module.exports = class PRReviewer {
 
       // Send to LLM
       logger.info("Sending structured diff to LLM for review...");
-      const reviewFilePath = await sendChangesToLLM(this.outputFile, this.mode);
+      const reviewFilePath = await new LLMService().processChanges(
+        this.outputFile,
+        this.mode
+      );
       logger.info(`Review saved to ${reviewFilePath}`);
 
       return reviewFilePath;
@@ -54,4 +58,4 @@ module.exports = class PRReviewer {
       logger.error("Failed to cleanup temporary files:", error);
     }
   }
-}
+};
