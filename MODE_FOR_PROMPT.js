@@ -20,11 +20,8 @@ module.exports = {
     description: `
             Please describe the changes this PR is making in a few sentences and topics please.
             - Summarize the changes into few topics, but don't be too general. Explain the changes and the reasons for them.
-            - When make sense create mermaid diagrams to explain the changes.
-            - When make sense create sequence diagrams explaining the flow of the changes.
-            - Make sure the generated mermaid diagrams are valid.
-            - All texts inside the diagrams should be placed inside double quotes and escaped.
-            - DON'T ADD COMMENTS TO THE DIAGRAMS. JUST THE DIAGRAM.
+            - When make sense create mermaid diagrams to explain the changes.   
+            - DON'T ADD COMMENTS INSIDE MERMAID DIAGRAMS. JUST THE DIAGRAM.
             - Don't add too many topics, make it easy to read. a Product person should be able to read this and understand the changes.
             - Don't be too verbose. Be very direct and to the point.
             `,
