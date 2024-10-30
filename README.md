@@ -295,3 +295,13 @@ For bugs and feature requests, please create an issue in the repository.
 ---
 
 **Note**: This tool is in active development. Please report any issues or suggestions for improvement.
+
+### Pushing to NPM
+
+```bash
+# Increment version
+npm version patch|minor|major
+
+# Publish
+npm publish
+```

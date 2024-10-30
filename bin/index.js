@@ -7,10 +7,12 @@ const PRReviewer = require("../src/PRMain");
 // Set up CLI
 const program = new Command();
 
+const version = require("../package.json").version;
+
 program
   .name("pr-reviewer")
   .description("CLI tool for automated PR reviews using LLM")
-  .version("1.0.0")
+  .version(version)
   .requiredOption("-b, --branch <branch>", "branch name to review")
   .option("-m, --mode <mode>", "review mode (review/description)", "review")
   .option(
