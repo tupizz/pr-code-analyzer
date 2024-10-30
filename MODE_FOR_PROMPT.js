@@ -22,7 +22,6 @@ module.exports = {
             - Summarize the changes into few topics, but don't be too general. Explain the changes and the reasons for them.
             - When make sense create mermaid diagrams to explain the changes.
             - When make sense create sequence diagrams explaining the flow of the changes.
-            - If there is any database changes, create a diagram to explain the changes, maybe a table schema diagram. Or ER diagram.
             - Make sure the generated mermaid diagrams are valid.
             - All texts inside the diagrams should be placed inside double quotes and escaped.
             - DON'T ADD COMMENTS TO THE DIAGRAMS. JUST THE DIAGRAM.
