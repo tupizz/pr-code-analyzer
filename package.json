@@ -2,7 +2,7 @@
   "name": "pr-reviewer",
   "version": "1.5.0",
   "description": "CLI tool for automated PR reviews using LLM",
-  "author": "Your Name <your.email@example.com>",
+  "author": "Tadeu Tupinambá <tadeu.tupiz@gmail.com>",
   "scripts": {
     "start": "node bin/index.js"
   },
