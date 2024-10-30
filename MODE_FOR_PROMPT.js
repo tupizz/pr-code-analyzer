@@ -24,6 +24,7 @@ module.exports = {
             - When make sense create sequence diagrams explaining the flow of the changes.
             - If there is any database changes, create a diagram to explain the changes, maybe a table schema diagram. Or ER diagram.
             - Make sure the generated mermaid diagrams are valid.
+            - All texts inside the diagrams should be placed inside double quotes and escaped.
             - DON'T ADD COMMENTS TO THE DIAGRAMS. JUST THE DIAGRAM.
             - Don't add too many topics, make it easy to read. a Product person should be able to read this and understand the changes.
             - Don't be too verbose. Be very direct and to the point.
