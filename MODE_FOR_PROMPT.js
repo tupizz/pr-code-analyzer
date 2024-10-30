@@ -8,6 +8,9 @@ module.exports = {
             Please give a brief explanation of the changes in a few sentences, be direct, less verbose. Use a simple language and add emojis to make it more fun. Don't need to add too much detail, just a brief explanation.
             IMPORTANT:
             - Don't use mardowns or code formatting. The output should be a simple text.
+            - At the end of the output, add a section estimating the amount of time it will take to review the changes. 
+                        Example:
+                        "⏱️ Estimated time to review: ~10 minutes"
             `,
 
     description: `

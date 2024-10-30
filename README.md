@@ -65,6 +65,7 @@ Options:
   -m, --mode <mode>               review mode (review/description) (default: "review")
   -t, --target-branch <branch>    target branch to compare against (default: "development")
   -v, --verbose                   enable verbose logging
+  -o, --output <output>           output folder (default: "tmp")  
   -h, --help                      display help for command
 ```
 
@@ -162,6 +163,7 @@ pr-reviewer/
 │   ├── GitOperations.js
 │   ├── DiffParser.js
 │   ├── PRReviewer.js
+│   ├── LLMAdapter.js
 │   └── send_to_llm.js
 ├── logs/
 │   ├── combined.log

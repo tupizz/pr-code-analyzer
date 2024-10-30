@@ -4,7 +4,7 @@
   "description": "CLI tool for automated PR reviews using LLM",
   "author": "Your Name <your.email@example.com>",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bin/index.js"
   },
   "main": "./src/send_to_llm.js",
   "bin": {
