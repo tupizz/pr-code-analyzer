@@ -15,7 +15,7 @@ module.exports = class PRReviewer {
     this.tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "pr_diff-"));
     this.outputFolder = options.output ? options.output : this.tmpDir;
     this.diffFile = path.join(this.tmpDir, "pr_diff.txt");
-    this.outputFile = path.join(this.outputFolder, "result.txt");
+    this.outputFile = path.join(this.tmpDir, "pr_changes_for_llm.txt");
   }
 
   async run() {
@@ -38,6 +38,7 @@ module.exports = class PRReviewer {
       const reviewFilePath = await new LLMService().processChanges(
         this.outputFile,
         this.mode,
+        this.outputFolder,
       );
       logger.info(`Review saved to ${reviewFilePath}`);
 

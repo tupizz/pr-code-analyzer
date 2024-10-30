@@ -29,7 +29,7 @@ module.exports = class LLMService {
    * @returns {Promise<string>} - Path to the output file
    * @throws {Error} - If file reading or writing fails
    */
-  async processChanges(changesFilePath, mode = "review") {
+  async processChanges(changesFilePath, mode = "review", outputFolder = null) {
     try {
       // Ensure file exists and read it
       await fs
@@ -52,11 +52,12 @@ module.exports = class LLMService {
         ],
       });
 
+      const outputFolderPath = outputFolder
+        ? outputFolder
+        : fsSync.mkdtempSync(path.join(os.tmpdir(), "llm-"));
+
       // Save and return results
-      const outputPath = path.join(
-        fsSync.mkdtempSync(path.join(os.tmpdir(), "llm-")),
-        `output_${mode}.txt`,
-      );
+      const outputPath = path.join(outputFolderPath, `output_${mode}.txt`);
 
       const result = response.choices[0].message.content;
 
