@@ -1,6 +1,8 @@
 {
   "name": "pr-reviewer",
   "version": "1.0.0",
+  "description": "CLI tool for automated PR reviews using LLM",
+  "author": "Your Name <your.email@example.com>",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -8,15 +10,25 @@
   "bin": {
     "pr-reviewer": "./bin/index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "pr",
+    "review",
+    "git",
+    "llm",
+    "ai",
+    "code-review"
+  ],
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "commander": "^12.1.0",
     "openai": "^4.67.3",
     "winston": "^3.15.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tupizz/pr-code-analyzer.git"
+  },
+  "homepage": "https://github.com/tupizz/pr-code-analyzer/blob/main/README.md",
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "eslint": "^9.13.0",

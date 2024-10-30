@@ -16,8 +16,9 @@ program
   .option(
     "-t, --target-branch <branch>",
     "target branch to compare against",
-    "development"
+    "development",
   )
+  .option("-o, --output <output>", "output folder", "")
   .option("-v, --verbose", "enable verbose logging")
   .action(async (options) => {
     try {
