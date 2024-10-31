@@ -27,11 +27,11 @@ module.exports = {
             - When make sense create mermaid diagrams to explain the changes.   
             - DON'T ADD COMMENTS INSIDE MERMAID DIAGRAMS. JUST THE DIAGRAM.
             - Don't add too many topics, make it easy to read. a Product person should be able to read this and understand the changes.
-            - Don't be too verbose. Be very direct and to the point.
             - When new API endpoints are created, please add a description of what the endpoint does. (URL, METHOD, payload and response).
+                - Be very detailed always think about the developer experience. It should be easy to understand and use.
                 - If the endpoint is a GET, please add a description of what the endpoint returns.
                 - If the endpoint is a POST, please add a description of what the endpoint expects in the payload.
-                - Add examples if needed.
+                - Add examples of requests and responses if needed.
             `,
   },
 };
