@@ -10,6 +10,10 @@ module.exports = {
             IMPORTANT:
             - Don't use mardowns or code formatting. The output should be a simple text.
             - Make it easy to read. And don't be too verbose.
+            - When new API endpoints are created, please add a description of what the endpoint does. (URL, METHOD, payload and response).
+                - If the endpoint is a GET, please add a description of what the endpoint returns.
+                - If the endpoint is a POST, please add a description of what the endpoint expects in the payload.
+                - Add examples if needed.
             - Don't be too much formal or too much casual. Be professional but friendly. The user is going to share this in a slack channel.
             - At the end of the output, add a section estimating the amount of time it will take to review the changes. 
             - Don't make the time estimation too long, it should be a rough estimate.
