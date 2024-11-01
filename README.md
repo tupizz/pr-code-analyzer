@@ -7,13 +7,13 @@ A CLI tool for automated code review and PR description generation using LLM (La
 
 ## Features
 
-A Node.js CLI tool that automates code reviews using LLM technology. Features:
-• 🔍 Automated code review generation
-• 📝 Smart PR description creation
-• 🎯 Multiple review modes (brief/detailed/description)
-• 📊 Git diff analysis
-• 🚀 Easy-to-use CLI interface
-• 📋 Comprehensive logging
+- 🔍 Automated code review generation
+- 📝 PR description generation with diagrams and topics
+- 🎯 Multiple review modes (brief, detailed, description)
+- 📊 Structured diff analysis
+- 🚀 Command-line interface with rich options
+- 📋 Comprehensive logging system
+- 🛡️ Robust error handling
 
 ## Prerequisites
 
