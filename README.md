@@ -1,8 +1,7 @@
 # PR Review Tool
 
 ![npm version](https://img.shields.io/npm/v/pr-reviewer)
-![Build Status](https://github.com/tupizz/pr-reviewer/actions/workflows/main.yml/badge.svg)
-![License](https://img.shields.io/github/license/tupizz/pr-reviewer)
+![License](https://img.shields.io/github/license/tupizz/pr-code-analyzer)
 
 A CLI tool for automated code review and PR description generation using LLM (Language Learning Model). This tool analyzes Git diffs, structures the changes, and leverages AI to provide insightful code reviews and PR descriptions.
 
