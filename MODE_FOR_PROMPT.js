@@ -23,6 +23,7 @@ module.exports = {
 
     description: `
             Please describe the changes this PR is making in a few sentences and topics please.
+            - Replace <!-- INSERT DESCRIPTION HERE --> with the description of the changes.
             - Summarize the changes into few topics, but don't be too general. Explain the changes and the reasons for them.
             - When make sense create mermaid diagrams to explain the changes.   
             - DON'T ADD COMMENTS INSIDE MERMAID DIAGRAMS. JUST THE DIAGRAM.
@@ -32,6 +33,22 @@ module.exports = {
                 - If the endpoint is a GET, please add a description of what the endpoint returns.
                 - If the endpoint is a POST, please add a description of what the endpoint expects in the payload.
                 - Add examples of requests and responses if needed.
+            - Follow the following format:
+                
+                <!-- Template -->
+                ### Description
+
+                <!-- INSERT DESCRIPTION HERE -->
+
+                ### New Features
+                - feat(): New feature
+                - feat(): New feature
+                
+                ### Bug Fixes
+                - fix(): Bug fix
+                - fix(): Bug fix
+
+                <!-- End Template -->
             `,
   },
 };
