@@ -1,5 +1,9 @@
 # PR Review Tool
 
+![npm version](https://img.shields.io/npm/v/pr-reviewer)
+![Build Status](https://github.com/tupizz/pr-reviewer/actions/workflows/main.yml/badge.svg)
+![License](https://img.shields.io/github/license/tupizz/pr-reviewer)
+
 A CLI tool for automated code review and PR description generation using LLM (Language Learning Model). This tool analyzes Git diffs, structures the changes, and leverages AI to provide insightful code reviews and PR descriptions.
 
 ## Features
@@ -65,7 +69,7 @@ Options:
   -m, --mode <mode>               review mode (review/description) (default: "review")
   -t, --target-branch <branch>    target branch to compare against (default: "development")
   -v, --verbose                   enable verbose logging
-  -o, --output <output>           output folder (default: "tmp")  
+  -o, --output <output>           output folder (default: "tmp")
   -h, --help                      display help for command
 ```
 
@@ -88,12 +92,14 @@ pr-reviewer --help
 ## Review Modes
 
 1. **review** (default)
+
    - Performs a detailed code review
    - Identifies potential issues
    - Suggests improvements
    - Reviews code style and best practices
 
 2. **description**
+
    - Generates comprehensive PR description
    - Creates diagrams where applicable
    - Lists key changes and impacts
@@ -116,21 +122,25 @@ The tool generates several output files:
 ## How It Works
 
 1. **Initialization**
+
    - Parses command-line arguments
    - Validates input parameters
    - Sets up logging system
 
 2. **Git Operations**
+
    - Fetches latest changes
    - Checks out specified branch
    - Generates diff against target branch
 
 3. **Diff Processing**
+
    - Parses Git diff output
    - Structures changes by file
    - Identifies additions and removals
 
 4. **LLM Integration**
+
    - Sends structured changes to LLM
    - Processes LLM response
    - Generates formatted output
@@ -143,12 +153,14 @@ The tool generates several output files:
 ## Error Handling
 
 The tool includes comprehensive error handling for:
+
 - Git operation failures
 - File system issues
 - LLM communication problems
 - Invalid input parameters
 
 Errors are:
+
 - Logged to error.log
 - Displayed in console with context
 - Handled gracefully with proper cleanup
@@ -183,10 +195,12 @@ pr-reviewer/
 Common issues and solutions:
 
 1. **Git access errors**
+
    - Ensure Git is properly configured
    - Check repository permissions
 
 2. **API key issues**
+
    - Verify OPEN_API_KEY is set
    - Check key validity
 
@@ -206,8 +220,8 @@ module.exports = {
   PROMPTS: {
     review: `[Your custom review prompt]`,
     brief: `[Your custom brief prompt]`,
-    description: `[Your custom description prompt]`
-  }
+    description: `[Your custom description prompt]`,
+  },
 };
 ```
 
@@ -252,8 +266,8 @@ module.exports = {
       2. Technical implementation details
       3. Testing considerations
       4. Visual diagrams where applicable
-    `
-  }
+    `,
+  },
 };
 ```
 
@@ -270,12 +284,13 @@ module.exports = {
 To add a new review mode:
 
 1. Add your new prompt to the `PROMPTS` object:
+
    ```js
    module.exports = {
      PROMPTS: {
        // Existing prompts...
-       newMode: `Your new prompt here`
-     }
+       newMode: `Your new prompt here`,
+     },
    };
    ```
 
