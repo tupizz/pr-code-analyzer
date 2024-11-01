@@ -1,6 +1,6 @@
 {
   "name": "pr-reviewer",
-  "version": "1.15.0",
+  "version": "1.16.0",
   "description": "CLI tool for automated PR reviews using LLM",
   "author": "Tadeu Tupinambá <tadeu.tupiz@gmail.com>",
   "scripts": {
