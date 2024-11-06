@@ -1,4 +1,4 @@
-function chunkByChangesPattern(text, max_length) {
+module.exports = function chunkByChangesPattern(text, max_length) {
   // Split text into sections by "Changes in file:" pattern
   const sections = text.split(/(?=Changes in file:)/);
   console.log(sections);
@@ -25,49 +25,4 @@ function chunkByChangesPattern(text, max_length) {
   }
 
   return chunks;
-}
-
-function run() {
-  const sampleText = `Changes in file: src/DiffParser.js
-Added: 
-Removed: 
-
-Changes in file: src/GitOperator.js
-Added: 
-Removed: 
-
-Changes in file: src/LLMAdapter.js
-Added: 
-Removed: 
-
-Changes in file: src/LLMAdapter.js
-Added: 
-Removed: 
-
-
-Changes in file: src/LLMAdapter.js
-Added: 
-Removed: 
-
-Changes in file: src/LLMAdapter.js
-Added: 
-Removed: 
-
-Changes in file: src/LLMAdapter.js
-Added: 
-Removed: 
-
-Changes in file: src/LLMAdapter.js
-Added: 
-Removed: 
-
-Changes in file: src/LLMAdapter.js
-Added: 
-Removed: 
-`;
-
-  const chunks = chunkByChangesPattern(sampleText, 300);
-  console.log(chunks.length);
-  console.log(chunks);
-}
-run();
+};
