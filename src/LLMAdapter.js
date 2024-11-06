@@ -43,10 +43,12 @@ module.exports = class LLMService {
         .catch(() => fs.writeFile(changesFilePath, "", "utf-8"));
 
       const changes = await fs.readFile(changesFilePath, "utf-8");
-      const chunks = chunkByChangesPattern(changes, 20_000);
+      const chunks = chunkByChangesPattern(changes, 10_000);
+      logger.info(`Chunked changes into ${chunks.length} chunks`);
 
       let result = "";
-      for (const chunk of chunks) {
+      for (const [index, chunk] of chunks.entries()) {
+        logger.info(`Processing chunk ${index + 1} of ${chunks.length}`);
         const response = await this.client.chat.completions.create({
           model: "gpt-4o-mini",
           messages: [
