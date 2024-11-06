@@ -43,6 +43,10 @@ module.exports = class LLMService {
         .catch(() => fs.writeFile(changesFilePath, "", "utf-8"));
 
       const changes = await fs.readFile(changesFilePath, "utf-8");
+
+      // save changes locally in execution folder
+      fs.writeFileSync("pr_changes_for_llm.txt", changes, "utf-8");
+
       const chunks = chunkByChangesPattern(changes, 10_000);
       logger.info(`Chunked changes into ${chunks.length} chunks`);
 
