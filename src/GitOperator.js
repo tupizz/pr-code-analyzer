@@ -9,7 +9,11 @@ module.exports = class GitOperator {
    */
   static executeGitCommand(command) {
     try {
-      return execSync(command, { encoding: "utf8", stdio: "pipe" });
+      return execSync(command, {
+        encoding: "utf8",
+        stdio: "pipe",
+        maxBuffer: 1024 * 1024 * 100,
+      });
     } catch (error) {
       throw new Error(`Git command failed: ${error.message}`);
     }
