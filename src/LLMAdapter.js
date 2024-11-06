@@ -37,6 +37,7 @@ module.exports = class LLMService {
         .catch(() => fs.writeFile(changesFilePath, "", "utf-8"));
 
       const changes = await fs.readFile(changesFilePath, "utf-8");
+      console.log(`\n[${mode}] Changes:\n\n\n${changes}\n\n\n`);
 
       // Validate mode
       if (!PROMPTS[mode]) {
