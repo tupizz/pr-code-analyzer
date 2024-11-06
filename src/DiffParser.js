@@ -1,6 +1,8 @@
 const fs = require("fs");
 const logger = require("./logger");
 
+const SKIP_FILES = ["package-lock.json", "package.json"];
+
 module.exports = class DiffParser {
   /**
    * Parses the diff file and extracts changes.
@@ -12,6 +14,7 @@ module.exports = class DiffParser {
     try {
       const changes = [];
       let currentFile = null;
+      let skipFile = false;
       const diffContent = fs.readFileSync(diffFilePath, "utf-8");
       const diffLines = diffContent.split("\n");
 
@@ -19,20 +22,22 @@ module.exports = class DiffParser {
         if (line.startsWith("diff --git")) {
           currentFile = line.split(" ")[2].replace("a/", "");
 
-          // Skip package-lock.json files
-          if (
-            currentFile.endsWith("package-lock.json") ||
-            currentFile.endsWith("package.json")
-          ) {
-            currentFile = null;
+          // Reset skipFile flag and check if we should skip this file
+          skipFile = SKIP_FILES.some((file) => currentFile.endsWith(file));
+
+          if (skipFile) {
+            console.log("Skipping package-lock.json or package.json");
             return;
           }
 
           changes.push(`\nChanges in file: ${currentFile}\n`);
-        } else if (line.startsWith("+") && !line.startsWith("+++")) {
-          changes.push(`Added: ${line.slice(1)}\n`);
-        } else if (line.startsWith("-") && !line.startsWith("---")) {
-          changes.push(`Removed: ${line.slice(1)}\n`);
+        } else if (!skipFile) {
+          // Only process lines if we're not skipping the current file
+          if (line.startsWith("+") && !line.startsWith("+++")) {
+            changes.push(`Added: ${line.slice(1)}\n`);
+          } else if (line.startsWith("-") && !line.startsWith("---")) {
+            changes.push(`Removed: ${line.slice(1)}\n`);
+          }
         }
       });
 
