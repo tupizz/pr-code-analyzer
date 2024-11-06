@@ -18,6 +18,16 @@ module.exports = class DiffParser {
       diffLines.forEach((line) => {
         if (line.startsWith("diff --git")) {
           currentFile = line.split(" ")[2].replace("a/", "");
+
+          // Skip package-lock.json files
+          if (
+            currentFile.endsWith("package-lock.json") ||
+            currentFile.endsWith("package.json")
+          ) {
+            currentFile = null;
+            return;
+          }
+
           changes.push(`\nChanges in file: ${currentFile}\n`);
         } else if (line.startsWith("+") && !line.startsWith("+++")) {
           changes.push(`Added: ${line.slice(1)}\n`);

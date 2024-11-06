@@ -5,7 +5,6 @@ const os = require("os");
 const OpenAI = require("openai");
 const logger = require("./logger");
 const { PROMPTS } = require("../MODE_FOR_PROMPT");
-const chunkByChangesPattern = require("./chunk");
 
 /**
  * LLMService class for interacting with OpenAI's GPT-4o-mini model
@@ -32,11 +31,6 @@ module.exports = class LLMService {
    */
   async processChanges(changesFilePath, mode = "review", outputFolder = null) {
     try {
-      // Validate mode
-      if (!PROMPTS[mode]) {
-        throw new Error(`Invalid mode: ${mode}`);
-      }
-
       // Ensure file exists and read it
       await fs
         .access(changesFilePath)
@@ -44,34 +38,31 @@ module.exports = class LLMService {
 
       const changes = await fs.readFile(changesFilePath, "utf-8");
 
-      // save changes locally in execution folder
-      await fs.writeFile("pr_changes_for_llm.txt", changes, "utf-8");
-
-      const chunks = chunkByChangesPattern(changes, 10_000);
-      logger.info(`Chunked changes into ${chunks.length} chunks`);
-
-      let result = "";
-      for (const [index, chunk] of chunks.entries()) {
-        logger.info(`Processing chunk ${index + 1} of ${chunks.length}`);
-        const response = await this.client.chat.completions.create({
-          model: "gpt-4o-mini",
-          messages: [
-            { role: "system", content: PROMPTS[mode] },
-            { role: "user", content: chunk },
-          ],
-        });
-
-        result += response.choices[0].message.content;
+      // Validate mode
+      if (!PROMPTS[mode]) {
+        throw new Error(`Invalid mode: ${mode}`);
       }
 
-      console.log(`\n\n\n[${mode}] Output:\n\n\n${result}\n\n\n`);
+      // Get LLM response
+      const response = await this.client.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          { role: "system", content: PROMPTS[mode] },
+          { role: "user", content: changes },
+        ],
+      });
 
-      // Save and return results
       const outputFolderPath = outputFolder
         ? outputFolder
         : fsSync.mkdtempSync(path.join(os.tmpdir(), "llm-"));
 
+      // Save and return results
       const outputPath = path.join(outputFolderPath, `output_${mode}.txt`);
+
+      const result = response.choices[0].message.content;
+
+      console.log(`\n[${mode}] Output:\n\n\n${result}\n\n\n`);
+
       await fs.writeFile(outputPath, result, "utf-8");
       return outputPath;
     } catch (error) {
