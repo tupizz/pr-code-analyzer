@@ -2,6 +2,13 @@ const fs = require("fs");
 const logger = require("./logger");
 
 const SKIP_FILES = ["package-lock.json", "package.json"];
+const SKIP_FOLDERS = [
+  "node_modules",
+  "dist",
+  "build",
+  "coverage",
+  "prayModules",
+];
 
 module.exports = class DiffParser {
   /**
@@ -22,8 +29,12 @@ module.exports = class DiffParser {
         if (line.startsWith("diff --git")) {
           currentFile = line.split(" ")[2].replace("a/", "");
 
+          logger.info(`Current file: ${currentFile}`);
+
           // Reset skipFile flag and check if we should skip this file
-          skipFile = SKIP_FILES.some((file) => currentFile.endsWith(file));
+          skipFile =
+            SKIP_FILES.some((file) => currentFile.endsWith(file)) ||
+            SKIP_FOLDERS.some((folder) => currentFile.includes(folder));
 
           if (skipFile) {
             console.log("Skipping package-lock.json or package.json");
